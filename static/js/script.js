@@ -5,4 +5,3 @@ function greetUser() {
 window.onload = function () {
     greetUser();
 }
-
