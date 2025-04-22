@@ -6,7 +6,7 @@ This version is built with **Flask** and is ready to be deployed on platforms li
 
 ---
 
-## 🚀 Features
+## Features
 
 - ✍️ Add new dream entries with date and description
 - 📖 View all saved dreams
@@ -15,7 +15,7 @@ This version is built with **Flask** and is ready to be deployed on platforms li
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠 Tech Stack
 
 - Python 3
 - Flask
