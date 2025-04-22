@@ -1,15 +1,20 @@
-from flask import Flask, request, render_template
+from flask import Flask
+from extensions import db, bcrypt, login_manager  # Import from extensions.py
+from models import User, DreamEntry  # Now safely import models after db initialization
 
 app = Flask(__name__)
-entries = []
+app.config['SECRET_KEY'] = 'your_secret_key_here'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 
-@app.route('/', methods=['GET', 'POST'])
-def diary():
-    if request.method == 'POST':
-        date = request.form['date']
-        content = request.form['content']
-        entries.append({'date': date, 'content': content})
-    return render_template('index.html', entries=entries)
+# Initialize the app with db, bcrypt, and login_manager
+db.init_app(app)
+bcrypt.init_app(app)
+login_manager.init_app(app)
+
+# User loader function for Flask-Login
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 if __name__ == '__main__':
     app.run(debug=True)
